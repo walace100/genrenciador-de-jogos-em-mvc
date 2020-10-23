@@ -1,0 +1,56 @@
+body {
+    background: #ddd;
+    font-family: Tahoma, Arial, sans-serif;
+}
+
+div#corpo {
+    width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 30px #777;
+}
+
+table.listagem {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+table.listagem tr {
+    height: 50px;
+}
+
+table.listagem td {
+    /* border: 1px solid #ddd; */
+    padding: 10px;
+}
+
+table.listagem tr:nth-child(even) {
+    background: #f2f2f2;
+}
+
+table.listagem td:first-child {
+    width: 50px;
+}
+
+table.listagem td:last-child {
+    width: 90px;
+}
+
+img.mini {
+    width: 50px;
+}
+
+table.detalhes {
+    width: 100%;
+}
+
+table.detalhes td {
+    padding: 10px;
+    vertical-align: top;
+}
+
+img.full {
+    height: 400px;
+}
