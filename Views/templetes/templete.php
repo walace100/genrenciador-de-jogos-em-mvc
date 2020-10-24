@@ -9,7 +9,9 @@
     </head>
     <body>
         <div id="corpo">
+            @@ topo @@
             @@ view @@
         </div>
+        @@ rodape @@
     </body>
 </html>

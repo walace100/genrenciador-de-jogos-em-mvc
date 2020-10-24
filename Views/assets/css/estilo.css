@@ -54,3 +54,19 @@ table.detalhes td {
 img.full {
     height: 400px;
 }
+
+footer {
+    text-align: center;
+    font-family: Arial;
+    font-size: 10px;
+}
+
+header {
+    font-size: 10px;
+    text-align: right;
+}
+
+form#busca {
+    font-size: 11px;
+    text-align: right;
+}

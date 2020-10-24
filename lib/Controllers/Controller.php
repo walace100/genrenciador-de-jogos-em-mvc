@@ -116,7 +116,7 @@ abstract class Controller
      * @param  array|null $parameters
      * @return this
      */
-    public function render(string $view, ?array ...$parameters): object
+    public function render(string $view, ...$parameters): object
     {
         $this->cleanFolders();
         $this->view = $this->getContents([$this->viewPath, $view]);
