@@ -15,4 +15,19 @@ class Utils
             return Route::string('/Views/fotos/indisponivel.png');
         }
     }
+
+    public static function msg_sucesso(string $m): string
+    {
+        return "<div class='sucesso'><i class='material-icons'>check_circle</i>$m</div>";
+    }
+
+    public static function msg_aviso(string $m): string
+    {
+        return "<div class='aviso'><i class='material-icons'>info</i>$m</div>";
+    }
+
+    public static function msg_erro(string $m): string
+    {
+        return "<div class='erro'><i class='material-icons'>error</i>$m</div>";
+    }
 }

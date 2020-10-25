@@ -1,7 +1,6 @@
 <?php
 
 use Lib\Http\CreateRoute as Route;
-use Lib\Http\Request;
 
 /**
  * Aqui você pode registrar as suas rotas para seus Controllers ou Callbacks.
@@ -10,3 +9,5 @@ use Lib\Http\Request;
 Route::get("/", "HomeController", "index");
 
 Route::get("/detalhes/{id}", "HomeController", "show");
+
+Route::any("/user/login", "Auth", "index");

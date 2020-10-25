@@ -1,4 +1,3 @@
-@@ use Lib\Http\CreateRoute as Route; @@
 <h1>Detalhes do jogo</h1>
 <table class="detalhes">
     @@ if (!$busca): @@
@@ -18,4 +17,4 @@
         <tr> <td> Nenhum registro encontrado.
     @@ endif @@
 </table>
-<a href="<?= Route::string('/') ?>"><img src="@@ echo Utils::thumb('icoback.png'); @@"/></a>
+@@ voltar @@

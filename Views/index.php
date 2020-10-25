@@ -18,10 +18,10 @@
         @@ foreach ($busca as $reg): @@
             <tr> 
                 <td> <img src="@@ echo Utils::thumb($reg->capa); @@" class="mini"/>
-                <td> <a href='detalhes/@ $reg->cod; @'>
-                @ $reg->nome; @</a>
-                [@ $reg->genero; @]
-                <br> @ $reg->produtora; @
+                <td> <a href="@ Route::string('detalhes/' . $reg->cod); @">
+                @ $reg->nome; @</a><br>
+                (@ $reg->genero; @)
+                @ $reg->produtora; @
                 <td> Adm
         @@ endforeach; @@
     @@ endif @@

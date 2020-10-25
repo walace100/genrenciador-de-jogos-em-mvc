@@ -8,6 +8,8 @@ use \Models\Jogos;
 
 class HomeController extends Controller
 {
+    private $jogos;
+    
     public function __construct()
     {
         $this->jogos = new Jogos();
@@ -43,14 +45,14 @@ class HomeController extends Controller
         }
 
         $busca = $this->jogos->joinTables($q, $bind);
-        $this->renderView('index', compact('busca'), compact('chave'));
+        $this->renderView('index', 'index',compact('busca'), compact('chave'));
     }
 
-    private function renderView(string $view, array ...$params) {
+    private function renderView(string $view, string $title, ?array ...$params) {
         $this->render($view, ...$params)
         ->templete('view', 'templete')
         ->assets(['css' => 'estilo'])
-        ->components(['titulo' => 'titulo', 'rodape' => 'rodape', 'topo' => 'topo']);
+        ->components(['titulo' => $title, 'rodape' => 'rodape', 'topo' => 'topo', 'voltar' => 'voltar']);
     }
 
     /**
@@ -68,7 +70,7 @@ class HomeController extends Controller
     {
         $c = is_numeric($id) ? (int) $id: 0;
         $busca = $this->jogos->find('cod', $c);
-        $this->renderView('detalhes', compact('busca'));
+        $this->renderView('detalhes', 'detalhes',compact('busca'));
     }
 
     /**
