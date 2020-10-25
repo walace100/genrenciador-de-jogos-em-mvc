@@ -1,5 +1,4 @@
-# genrenciador-de-jogos-em-mvc
-genrenciador de jogos em mvc
+# genrenciador de jogos em mvc
 ***
 ## Configuração
 Importe o banco e coloque o acesso ao banco em:
