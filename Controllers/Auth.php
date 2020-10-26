@@ -16,7 +16,7 @@ class Auth extends Controller
     {
         $this->users = new Autenticacao();
         $this->request = new Request();
-        if (!isset($this->request->session()->user)){
+        if (!isset($this->request->session()->all()->user)){
             $this->request->session()->user = "";
             $this->request->session()->nome = "";
             $this->request->session()->tipo = "";
@@ -29,11 +29,11 @@ class Auth extends Controller
         $s = $this->request->post()->senha ?? null;
 
         if (is_null($u) || is_null($s)) {
-            $this->renderView('user-login-form', 'login');
+            $this->renderView('user-login-form', 'login', 'templete-login');
         } else {
             $busca = $this->users->find('usuario', $u, ['usuario', 'nome', 'senha', 'tipo']);
             $reg = $busca[0] ?? $busca;
-            $this->renderView('user-login', 'login', compact('busca'), compact('s'));
+            $this->renderView('user-login', 'login', 'templete-login', compact('busca'), compact('s'));
         }
     }
 
@@ -58,15 +58,16 @@ class Auth extends Controller
         return $c;
     }
 
-    private function renderView(string $view, string $title, ?array ...$params) {
+    private function renderView(string $view, string $title, $templete,?array ...$params) {
         $this->render($view, ...$params)
-        ->templete('view', 'templete-login')
+        ->templete('view', $templete)
         ->assets(['css' => 'estilo'])
         ->components(['titulo' => $title, 'rodape' => 'rodape', 'topo' => 'topo', 'voltar' => 'voltar']);
     }
 
     public static function logout(): void
     {
+        echo 'aaa';
         $request = new Request();
         $request->session()->delete('user');
         $request->session()->delete('nome');
@@ -75,7 +76,7 @@ class Auth extends Controller
 
     public function sair(): void
     {
-        $this->renderView('user-logout', 'login');
+        $this->renderView('user-logout', 'logout', 'templete-login');
     }
 
     public static function isLogado(): bool
@@ -113,6 +114,29 @@ class Auth extends Controller
             return true;
         } else {
             return false;
+        }
+    }
+
+    public function create(): void
+    {
+        $msg = [403, 'Área Restrita! Você não é administrador'];
+        if (!self::isAdmin()) {
+            $msg = true;
+        } elseif (!isset($this->request->post()->usuario)) {
+            $this->renderView('user-new-form', 'criar-usuario', 'templete-sem-topo');
+        } else {
+            $usuario = $this->request->post()->usuario ?? null;
+            $nome = $this->request->post()->nome ?? null;
+            $senha1 = $this->request->post()->senha1 ?? null;
+            $senha2 = $this->request->post()->senha2 ?? null;
+
+            if ($senha1 === $senha2) {
+                $msg = [201, 'Tudo certo para gravar'];
+            } else {
+                $msg = [403, 'Senahs não conferem. Repita o procedimento'];
+            }
+
+            $this->renderView('user-new', 'criar-usuario', 'templete-sem-topo', compact('msg'));
         }
     }
 }

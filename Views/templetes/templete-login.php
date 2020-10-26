@@ -6,16 +6,11 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
         @@ css @@
-        <style>
-            div#corpo {
-                width: 270px;
-                font-size: 13pt;
-            }
-            table td {
-                padding: 6px;
-            }
-        </style>
+        @@ css2 @@
         <title>@@ titulo @@</title>
+        @@ use Lib\Http\Request; @@
+        @@ use Controllers\Auth; @@
+        @@ use Controllers\Utils; @@
         @@ use Lib\Http\CreateRoute as Route; @@
     </head>
     <body>

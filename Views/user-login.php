@@ -1,9 +1,5 @@
 <?php
 
-use Controllers\Utils;
-use Controllers\Auth;
-use Lib\Http\Request;
-
 $request = new Request();
 if (!$busca) {
     echo Utils::msg_erro('Falha ao acessar o banco!');
