@@ -23,7 +23,7 @@ class Auth extends Controller
         }
     }
 
-    public function index()
+    public function index(): void
     {
         $u = $this->request->post()->usuario ?? null;
         $s = $this->request->post()->senha ?? null;
@@ -48,7 +48,8 @@ class Auth extends Controller
         return password_verify(self::cripto($senha), $hash);
     }
 
-    public static function cripto(string $senha) {
+    public static function cripto(string $senha): string
+    {
         $c = '';
         for ($pos = 0; $pos < strlen($senha); $pos++) {
             $letra = ord($senha[$pos]) + 1;
@@ -62,5 +63,18 @@ class Auth extends Controller
         ->templete('view', 'templete-login')
         ->assets(['css' => 'estilo'])
         ->components(['titulo' => $title, 'rodape' => 'rodape', 'topo' => 'topo', 'voltar' => 'voltar']);
+    }
+
+    public static function logout(): void
+    {
+        $request = new Request();
+        $request->session()->delete('user');
+        $request->session()->delete('nome');
+        $request->session()->delete('tipo');
+    }
+
+    public function sair(): void
+    {
+        $this->renderView('user-logout', 'login');
     }
 }

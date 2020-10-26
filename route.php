@@ -11,3 +11,5 @@ Route::get("/", "HomeController", "index");
 Route::get("/detalhes/{id}", "HomeController", "show");
 
 Route::any("/user/login", "Auth", "index");
+
+Route::get("/user/logout", "Auth", "sair");
