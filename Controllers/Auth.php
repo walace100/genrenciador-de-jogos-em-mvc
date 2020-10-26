@@ -77,4 +77,42 @@ class Auth extends Controller
     {
         $this->renderView('user-logout', 'login');
     }
+
+    public static function isLogado(): bool
+    {
+        $request = new Request();
+        if (empty($request->session()->all()->user)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static function isAdmin(): bool
+    {
+        $request = new Request();
+        $tipo = $request->session()->all()->tipo ?? null;
+
+        if (is_null($tipo)) {
+            return false;
+        } elseif ($tipo === 'admin') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function isEditor(): bool
+    {
+        $request = new Request();
+        $tipo = $request->session()->all()->tipo ?? null;
+
+        if (is_null($tipo)) {
+            return false;
+        } elseif ($tipo === 'editor') {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

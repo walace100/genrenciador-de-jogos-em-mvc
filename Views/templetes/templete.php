@@ -8,6 +8,7 @@
         @@ css @@
         <title>@@ titulo @@</title>
         @@ use Controllers\Utils; @@
+        @@ use Controllers\Auth; @@
         @@ use Lib\Http\CreateRoute as Route; @@
     </head>
     <body>

@@ -18,11 +18,22 @@
         @@ foreach ($busca as $reg): @@
             <tr> 
                 <td> <img src="@@ echo Utils::thumb($reg->capa); @@" class="mini"/>
-                <td> <a href="@ Route::string('detalhes/' . $reg->cod); @">
-                @ $reg->nome; @</a><br>
-                (@ $reg->genero; @)
-                @ $reg->produtora; @
-                <td> Adm
+                <td>
+                    <a href="@ Route::string('detalhes/' . $reg->cod); @">
+                    @ $reg->nome; @</a>
+                    <br>
+                    (@ $reg->genero; @)
+                    @ $reg->produtora; @
+                    @@ if (Auth::isAdmin()): @@
+                        <td>
+                            <i class="material-icons">add_circle</i>
+                            <i class="material-icons">edit</i>
+                            <i class="material-icons">delete</i>
+                    @@ elseif (Auth::isEditor()): @@
+                        <td> <i class="material-icons">edit</i>
+                    @@ else: @@
+                        <td>
+                    @@ endif @@
         @@ endforeach; @@
     @@ endif @@
 </table>
