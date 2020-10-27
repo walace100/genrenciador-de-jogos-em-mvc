@@ -4,7 +4,7 @@
         <a href="@ Route::string('/user/login'); @">Entrar</a>
     @@ else: @@
         Olá, <strong> @ $request->session()->all()->nome; @! </strong>|
-        Meus Dados |
+        <a href="@ Route::string('/user/editar'); @">Meus Dados</a> |
         @@ if(Auth::isAdmin()): @@
             <a href="@ Route::string('/user/novo'); @">Novo usuário</a> |
             Novo jogo |

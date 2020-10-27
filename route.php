@@ -15,3 +15,5 @@ Route::any("/user/login", "Auth", "index");
 Route::get("/user/logout", "Auth", "sair");
 
 Route::any("/user/novo", "Auth", "create");
+
+Route::any("/user/editar", "Auth", "update");
