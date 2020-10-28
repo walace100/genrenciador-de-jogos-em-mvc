@@ -164,7 +164,25 @@ class Auth extends Controller
             $busca = $this->users->find('usuario', $this->request->session()->all()->user, ['usuario', 'nome', 'senha', 'tipo'])[0];
             $this->renderView('user-edit-form', 'editar-usuario', 'templete-sem-topo', compact('busca'));
         } else {
-            echo 'aa';
+            $nome = $this->request->has('nome')->post()->nome;
+            $senha1 = $this->request->has('senha1')->post()->senha1;
+            $senha2 = $this->request->has('senha2')->post()->senha2;
+            $usuario = $this->request->session()->all()->user;
+
+            if (empty($senha1) || is_null($senha1) || empty($senha2) || is_null($senha2)) {
+                $this->users->update(['nome' => $nome], ['usuario' => $usuario]);
+                $msg[] = [206, 'Senha antiga foi mantida.'];
+                $msg[] = [200, 'Usuário alterado sucesso!'];
+            } elseif ($senha1 === $senha2) {
+                $senha = self::gerarHash($senha1);
+                $this->users->update(['nome' => $nome, 'senha' => $senha], ['usuario' => $usuario]);
+            } else {
+                $msg[] = [400, 'Senhas não conferem. A senha antiga foi mantida.'];
+                $msg[] = [200, 'Usuário alterado sucesso!'];
+            }
+            self::logout();
+            $msg[] = [206, 'Por segurança, efetue o <a href="'. Route::string('user/login') .'">Login</a> novamente.'];
+            $this->renderView('mensagem', 'editar-usuario', 'templete-sem-topo', compact('msg'));
         }
         
     }
